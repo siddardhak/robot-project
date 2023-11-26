@@ -9,62 +9,41 @@ const executeCommand = (
   indCommands: Directions[],
   currentPosition: CurrentPosition
 ) => {
-  const result = indCommands.map((cmd) => {
+  const result = indCommands.reduce((currentPos, cmd) => {
+    let newPosition: CurrentPosition;
+
     switch (cmd) {
       case "N":
-        if (!(currentPosition.y < 5)) {
-          console.log("out of boundary", currentPosition);
-          throw Error("Out of Boundary");
-        }
-        const positionNY = currentPosition.y + 1;
-        currentPosition = {
-          x: currentPosition.x,
-          y: positionNY,
-        };
-        return currentPosition;
-
+        newPosition = { x: currentPos.x, y: currentPos.y + 1 };
+        break;
       case "E":
-        if (!(currentPosition.x < 5)) {
-          console.log("out of boundary", currentPosition);
-          throw Error("Out of Boundary");
-        }
-        const positionEX = currentPosition.x + 1;
-        currentPosition = {
-          x: positionEX,
-          y: currentPosition.y,
-        };
-        return currentPosition;
+        newPosition = { x: currentPos.x + 1, y: currentPos.y };
+        break;
       case "S":
-        if (!(currentPosition.y > -5)) {
-          console.log("out of boundary", currentPosition);
-          throw Error("Out of Boundary");
-        }
-
-        const positionSY = currentPosition.y - 1;
-        currentPosition = {
-          x: currentPosition.x,
-          y: positionSY,
-        };
-        return currentPosition;
+        newPosition = { x: currentPos.x, y: currentPos.y - 1 };
+        break;
       case "W":
-        if (!(currentPosition.x > -5)) {
-          console.log("out of boundary", currentPosition);
-          throw Error("Out of Boundary");
-        }
-        const positionWX = currentPosition.x - 1;
-        currentPosition = {
-          x: positionWX,
-          y: currentPosition.y,
-        };
-        return currentPosition;
-
+        newPosition = { x: currentPos.x - 1, y: currentPos.y };
+        break;
       default:
-        throw Error("incorrect command");
+        throw new Error("Incorrect command");
     }
-  });
+
+    if (
+      newPosition.x < -5 ||
+      newPosition.x > 5 ||
+      newPosition.y < -5 ||
+      newPosition.y > 5
+    ) {
+      console.log("Out of boundary", newPosition);
+      throw new Error("Out of boundary");
+    }
+
+    return newPosition;
+  }, currentPosition);
 
   console.log("Final path", result);
-  return result[result.length - 1];
+  return result;
 };
 
 export function main(args: string[]) {

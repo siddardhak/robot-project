@@ -17,13 +17,13 @@ describe("grid problem", () => {
   it("will throw the error", () => {
     const result = () => main(["X Y Z", "-4", "-4"]);
 
-    expect(result).toThrow(new Error("incorrect command"));
+    expect(result).toThrow(new Error("Incorrect command"));
   });
 
   it("will throw the error because of out of boundary for south west corner", () => {
     const result = () => main(["S W S W S W S", "-4", "-4"]);
 
-    expect(result).toThrow(new Error("Out of Boundary"));
+    expect(result).toThrow(new Error("Out of boundary"));
   });
 
   it("will return a result for S W N E S W", () => {
@@ -41,6 +41,6 @@ describe("grid problem", () => {
   it("will throw an Error for North", () => {
     const result = () => main(["N N N N N N", "0", "0"]);
 
-    expect(result).toThrow(new Error("Out of Boundary"));
+    expect(result).toThrow(new Error("Out of boundary"));
   });
 });
