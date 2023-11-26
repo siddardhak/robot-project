@@ -14,6 +14,24 @@ describe("grid problem", () => {
     expect(result).toBeNull();
   });
 
+  it("will return null if x co-ordinate is not number", () => {
+    const result = () => main(["N N N N N N", "x", "0"]);
+
+    expect(result).toThrow(new Error("x and y co-ordinates must be numbers"));
+  });
+
+  it("will return null if y co-ordinate is not number", () => {
+    const result = () => main(["N N N N N N", "0", "y"]);
+
+    expect(result).toThrow(new Error("x and y co-ordinates must be numbers"));
+  });
+
+  it("will return null if x and y co-ordinates are not number", () => {
+    const result = () => main(["N N N N N N", "x", "y"]);
+
+    expect(result).toThrow(new Error("x and y co-ordinates must be numbers"));
+  });
+
   it("will throw the error", () => {
     const result = () => main(["X Y Z", "-4", "-4"]);
 
