@@ -13,3 +13,4 @@ node --loader ts-node/esm index.ts "N E N E N E" "0" "0"
 for the above command robot starts from position 0,0 and move towards the give command
 
 4. To run the tests run command npm run test
+5. 
